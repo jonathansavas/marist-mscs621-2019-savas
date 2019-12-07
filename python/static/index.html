@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      background-image: url('static/images/cloud.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+    </style>
+  <head>
+    <title>Parabond</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/stylesheets/style.css">
+    <script src="static/javascripts/jquery-3.3.1.min.js"></script>
+  </head>
+  <body>
+      <div class="leftHalf">
+
+    
+      <table>
+		<tr>
+            <td style= "width:20%;">
+			<td>
+				<h1 id = "message">Parabond REST API Service</h1>
+				<p class='description'>
+				GET /price/batch/{num_portfs} to price a batch of portfolios.
+				<br><br>
+        GET /query/bond/{bond_id} to query the database for information <br>
+        on a specific bond instrument.
+				<br><br>
+        GET /query/portfolio/{portf_id} to query the database for information <br>
+        on a specific portfolio instrument.
+				<br><br>
+                Try out parabond, running on Google Kubernetes Engine:<br>
+                <input type="radio" name="endpoint" id="/price/batch" value="/price/batch" checked> /price/batch<br>
+                <input type="radio" name="endpoint" id="/query/bond" value="/query/bond"> /query/bond<br>
+                <input type="radio" name="endpoint" id="/query/portfolio" value="/query/portfolio"> /query/portfolio<br><br>
+                Instrument ID or batch size:<br>
+                <input type="text" id="param"><br>
+                Application password:<br>
+                <input type="password" id="pw"><br>
+                <button id="send_request">Send Request</button><br>
+			  </td>
+		  </tr>
+    </table>
+  </div>
+  <div class="rightHalf">
+    Result: <textarea id="result" type="text"></textarea>
+  </div>
+  <div class="clearfix"></div>
+  </body>
+</html>
+
+<script>
+jQuery(document).ready(function ($) {
+  $('#send_request').click(function(e) {
+    var data = {};
+    var endpoint = $('input[name=endpoint]:checked').val();
+    var param = $('#param').val();
+    var pw = btoa($('#pw').val());
+
+    var url = endpoint.concat("/".concat(param))
+
+    $.ajax({
+      type: "GET",
+      url: url,
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Basic '.concat(pw)
+      },
+      success: function(data, textStatus, jQxhr) {
+        var obj = JSON.parse(data);
+        if (endpoint == "/price/batch") {
+          $('#result').append("Number of Portfolios: " + obj.numPortfolios + "\n");
+          $('#result').append("t1: " + obj.t1 + "\n");
+          $('#result').append("tN: " + obj.tN + "\n");
+          $('#result').append("Portfolios priced: \n");
+          obj.portfs.forEach(portf => {
+            var components = portf.split(":");
+            $('#result').append("    ID: " + components[0] + ", Value: " + components[1] + "\n");
+          }); 
+          $('#result').append("\n");         
+        } else if (endpoint == "/query/bond") {
+          $('#result').append("Bond ID: " + obj.id + "\n");
+          $('#result').append("Coupon: " + obj.coupon + "\n");
+          $('#result').append("Freqency: " + obj.freq + "\n");
+          $('#result').append("Tenor: " + obj.tenor + "\n");
+          $('#result').append("Maturity: " + obj.maturity + "\n");
+          $('#result').append("Value: " + obj.value + "\n");
+          $('#result').append("\n");
+        } else if (endpoint == "/query/portfolio") {
+          $('#result').append("Portfolio ID: " + obj.id + "\n");
+          $('#result').append("Value: " + obj.value + "\n");
+          $('#result').append("Bond IDs: \n");
+          obj.bondIds.forEach(bondId => {
+            $('#result').append("    " + bondId + "\n");
+          });
+          $('#result').append("\n");
+        }
+      },
+      error: function(jqXhr, textStatus, errorThrown) {
+        alert(errorThrown);
+      }
+    });
+
+    e.preventDefault();
+  });
+});
+</script>
