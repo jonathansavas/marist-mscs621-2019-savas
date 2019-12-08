@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "paradispatcher.proto";
+
+option java_package = "com.github.jonathansavas.parabond.ParaWorker";
+option java_outer_classname = "ParaWorkerProto";
+
+service ParaWorker {
+    rpc work(GrpcPartition) returns (GrpcResult) {}
+}
+
+message GrpcPartition {
+    int32 n = 1;
+    int32 begin = 2;
+    int32 seed = 3;
+    bool para = 4;
+    int32 size = 5;
+}
+
+message GrpcResult {
+    int64 t0 = 1;
+    int64 t1 = 2;
+    repeated GrpcPortf portfs = 3;
+}

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: controller
+  name: controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: controller
+  template:
+    metadata:
+      labels:
+        run: controller
+    spec:
+      containers:
+        - name: controller
+          image: jonathansavas/parabond:controller-1.0.0-SNAPSHOT-marist-project
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+          env:
+            - name: PARADISPATCHER_SVC_HOST
+              value: paradispatcher-server
+            - name: PARADISPATCHER_SVC_PORT
+              value: "9898"
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: parabond-client
+                  key: parabond-password
+          ports:
+            - name: http
+              containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: controller
+  labels:
+    run: controller
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    run: controller

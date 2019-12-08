@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_package = "com.github.jonathansavas.parabond.ParaDispatcher";
+option java_outer_classname = "ParaDispatcherProto";
+
+service ParaDispatcher {
+    rpc dispatch(GrpcJobSize) returns (GrpcJobInfo) {}
+    rpc queryBond(GrpcInstrumentId) returns (GrpcBond) {}
+    rpc queryPortfolio(GrpcInstrumentId) returns (GrpcPortf) {}
+}
+
+message GrpcJobSize {
+    int32 n = 1;
+}
+
+message GrpcInstrumentId {
+    int32 id = 1;
+}
+
+message GrpcJobInfo {
+    int64 t1 = 1;
+    int64 tN = 2;
+    repeated GrpcPortf portfs = 3;
+}
+
+message GrpcPortf {
+    int32 id = 1;
+    double value = 2;
+    repeated int32 bondIds = 3;
+}
+
+message GrpcBond {
+    int32 id = 1;
+    double coupon = 2;
+    int32 freq = 3;
+    double tenor = 4;
+    double maturity = 5;
+    double value = 6;
+}
