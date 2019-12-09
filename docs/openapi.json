@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Marist-MSCS621-2019-Savas-Parabond",
+    "title": "Sample Application",
     "version": "0.1.0"
   },
   "paths": {
@@ -32,15 +32,11 @@
             },
             "required": true,
             "description": "Size of portfolio batch [1,100]"
-          },
+          }
+        ],
+        "security": [
           {
-            "in": "header",
-            "name": "auth",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Base64-encoded application password"
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -68,15 +64,11 @@
             },
             "required": true,
             "description": "Bond ID [1,5000]"
-          },
+          }
+        ],
+        "security": [
           {
-            "in": "header",
-            "name": "auth",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Base64-encoded application password"
+            "basicAuth": []
           }
         ],
         "responses": {
@@ -104,15 +96,11 @@
             },
             "required": true,
             "description": "Portfolio ID [1,100000]"
-          },
+          }
+        ],
+        "security": [
           {
-            "in": "header",
-            "name": "auth",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Base64-encoded application password"
+            "basicAuth": []
           }
         ],
         "responses": {
