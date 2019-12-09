@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Marist-MSCS621-2019-Savas-Parabond",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Read Root page",
+        "operationId": "index"
+      }
+    },
+    "/price/batch/{num_portfs}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "num_portfs",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Size of portfolio batch [1,100]"
+          },
+          {
+            "in": "header",
+            "name": "auth",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Base64-encoded application password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Price a batch of portfolios",
+        "operationId": "price_batch"
+      }
+    },
+    "/query/bond/{bond_id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bond_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Bond ID [1,5000]"
+          },
+          {
+            "in": "header",
+            "name": "auth",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Base64-encoded application password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Retrieve information for a specific bond",
+        "operationId": "query_bond"
+      }
+    },
+    "/query/portfolio/{portf_id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "portf_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Portfolio ID [1,100000]"
+          },
+          {
+            "in": "header",
+            "name": "auth",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Base64-encoded application password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Retrieve information for a specific portfolio",
+        "operationId": "query_portfolio"
+      }
+    }
+  }
+}

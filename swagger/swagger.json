@@ -1,0 +1,159 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Sample Application",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Read Root page",
+        "operationId": "index"
+      }
+    },
+    "/data/{data_id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "data_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the data to get"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Retrieve data with data_id",
+        "operationId": "get_data"
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "data_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the data to put"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Put data with data_id",
+        "operationId": "update_data"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "data_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the data to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Delete data with data_id",
+        "operationId": "delete_data"
+      }
+    },
+    "/data/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Retrieve data",
+        "operationId": "list_data"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Post all data",
+        "operationId": "create_data"
+      }
+    },
+    "/data/{data_id}/purchase": {
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "data_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the data to purchase"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "summary": "Purchase data",
+        "operationId": "purchase_data"
+      }
+    }
+  }
+}

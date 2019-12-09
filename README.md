@@ -24,3 +24,4 @@ $ kubectl apply -f paradispatcher.yaml </br>
 $ kubectl apply -f paraworker.yaml </br>
 $ kubectl apply -f controller.yaml </br>
 $ kubectl describe service controller (this will show the exposed IP:port to access the cluster) </br>
+$ kubectl apply -f flask-server.yaml (set the correct GCLOUD_TARGET, this will be deployed to a different cluster) </br>
