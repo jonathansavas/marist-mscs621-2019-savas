@@ -4,4 +4,4 @@ We deploy the Parabond cluster to Google Kubernetes Engine running in Google Clo
 
 Check out the API specification here: https://jonathansavas.github.io/marist-mscs621-2019-savas/apidoc.html
 
-And check out a more in-depth description of the application technologies here: https://github.com/jonathansavas/marist-mscs621-2019-savas
+And check out a more in-depth description of the application technologies by clicking 'View on GitHub' above!
