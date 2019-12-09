@@ -6,11 +6,11 @@ The REST server that clients will interface with is a Python Flask application. 
 
 The Java containers in the Parabond application are easily built without configuring a local Docker runtime using the Jib Maven plugin (https://github.com/GoogleContainerTools/jib). This triggers building of Docker images during the Maven build which are automatically pushed to the configured remote repository. The images for the application are already configured to be pulled from my docker hub account for deployment into Kubernetes. Users can also pull the source code and edit the Jib configuration in the pom.xml file to use their own remote repository. Upon creating a Kubernetes cluster, the application can be deployed with a series of kubectl commands: 
 
-$ kubectl create secret generic parabond-client --from-literal=parabond-password='password'
-$ kubectl apply -f mongo.yaml
-$ kubectl apply -f paradispatcher.yaml
-$ kubectl apply -f paraworker.yaml
-$ kubectl apply -f controller.yaml
-$ kubectl describe service controller (this will show the exposed IP:port to access the cluster)
+$ kubectl create secret generic parabond-client --from-literal=parabond-password='password' </br>
+$ kubectl apply -f mongo.yaml </br>
+$ kubectl apply -f paradispatcher.yaml </br>
+$ kubectl apply -f paraworker.yaml </br>
+$ kubectl apply -f controller.yaml </br>
+$ kubectl describe service controller (this will show the exposed IP:port to access the cluster) </br>
 
 The application architecture diagrams can be found as .drawio files in the repository files.
