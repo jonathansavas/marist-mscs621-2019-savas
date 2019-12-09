@@ -26,13 +26,13 @@
 			<td>
 				<h1 id = "message">Parabond REST API Service</h1>
 				<p class='description'>
-				GET /price/batch/{num_portfs} to price a batch of portfolios.
+				GET /price/batch/{num_portfs} to price a batch of portfolios [1,100]
 				<br><br>
         GET /query/bond/{bond_id} to query the database for information <br>
-        on a specific bond instrument.
+        on a specific bond instrument [1,5000]
 				<br><br>
         GET /query/portfolio/{portf_id} to query the database for information <br>
-        on a specific portfolio instrument.
+        on a specific portfolio instrument [1,100000]
 				<br><br>
                 Try out parabond, running on Google Kubernetes Engine:<br>
                 <input type="radio" name="endpoint" id="/price/batch" value="/price/batch" checked> /price/batch<br>

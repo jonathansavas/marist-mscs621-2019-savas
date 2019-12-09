@@ -34,8 +34,6 @@ def price_batch(num_portfs):
     req = requests.get(f"{GCLOUD_TARGET}/price/batch?size={num_portfs}",
                     headers={'Authorization': auth},
                     verify=False)
-
-    print(req.text)
     
     return jsonify(req.text), 200
 
@@ -53,8 +51,6 @@ def query_bond(bond_id):
     req = requests.get(f"{GCLOUD_TARGET}/query/bond?id={bond_id}",
                     headers={'Authorization': auth},
                     verify=False)
-
-    print(req.text)
     
     return jsonify(req.text), 200
 
@@ -72,8 +68,6 @@ def query_portfolio(portf_id):
     req = requests.get(f"{GCLOUD_TARGET}/query/portfolio?id={portf_id}",
                     headers={'Authorization': auth},
                     verify=False)
-    
-    print(req.text)
 
     return jsonify(req.text), 200
 
@@ -111,5 +105,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-#print(str(base64.b64encode(str.encode('KubernetesSecret')), 'utf-8'))
