@@ -18,6 +18,7 @@ The REST server that clients will interface with is a Python Flask application. 
 
 The Java containers in the Parabond application are easily built without configuring a local Docker runtime using the Jib Maven plugin (https://github.com/GoogleContainerTools/jib). This triggers building of Docker images during the Maven build which are automatically pushed to the configured remote repository. The images for the application are already configured to be pulled from my docker hub account for deployment into Kubernetes. Users can also pull the source code and edit the Jib configuration in the pom.xml file to use their own remote repository. Upon creating a Kubernetes cluster, the application can be deployed with a series of kubectl commands: 
 
+$ kubectl label namespace default istio-injection=enabled </br>
 $ kubectl create secret generic parabond-client --from-literal=parabond-password='password' </br>
 $ kubectl apply -f mongo.yaml </br>
 $ kubectl apply -f paradispatcher.yaml </br>
@@ -25,3 +26,8 @@ $ kubectl apply -f paraworker.yaml </br>
 $ kubectl apply -f controller.yaml </br>
 $ kubectl describe service controller (this will show the exposed IP:port to access the cluster) </br>
 $ kubectl apply -f flask-server.yaml (set the correct GCLOUD_TARGET, this will be deployed to a different cluster) </br>
+
+To scale out the number of worker nodes:</br>
+$ kubectl scale deployment.v1.apps/paraworker --replicas=5</br>
+
+Note: You may need to provision more cluster nodes or set an auto-scaling policy for the cluster, or else these worker nodes may not be schedulable. Also, since there is only a single database in the current application architecture, it will eventually become a bottleneck.
