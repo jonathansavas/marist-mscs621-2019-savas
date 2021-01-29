@@ -19,7 +19,7 @@
         <scala-maven-plugin-version>4.1.1</scala-maven-plugin-version>
         <log4j.version>2.12.1</log4j.version>
         <jib-maven-plugin.version>1.6.1</jib-maven-plugin.version>
-        <kubernetes-client-java.version>5.0.0</kubernetes-client-java.version>
+        <kubernetes-client-java.version>9.0.2</kubernetes-client-java.version>
     </properties>
 
     <dependencies>
